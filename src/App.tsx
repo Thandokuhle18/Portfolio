@@ -7,7 +7,7 @@ import { ToolkitSection } from './components/ToolkitSection'
 import { WorkSection } from './components/WorkSection'
 
 function App() {
-  return <><Header /><main><Hero /><WorkSection /><AboutSection /><ToolkitSection /><ContactSection /></main><Footer /></>
+  return <><Header /><main><Hero /><AboutSection /><WorkSection /><ToolkitSection /><ContactSection /></main><Footer /></>
 }
 
 export default App

@@ -4,7 +4,7 @@ import { Reveal } from './Reveal'
 export function ContactSection() {
   return (
     <section className="contact-section page-shell section-space" id="contact" aria-labelledby="contact-heading">
-      <div><SectionHeading number="005" label="GET IN TOUCH" title="Let's talk" id="contact-heading" /><p className="contact-note">For opportunities, collaborations, or a thoughtful conversation.</p></div>
+      <div><SectionHeading label="GET IN TOUCH" title="Let's talk" id="contact-heading" /><p className="contact-note">For opportunities, collaborations, or a thoughtful conversation.</p></div>
       <Reveal className="contact-links">
         <a className="cv-link" href="/Thandokuhle-Maphanga-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
         <a className="email-link" href="mailto:maphangathandokuhle@gmail.com">maphangathandokuhle@gmail.com <span aria-hidden="true">↗</span></a>
