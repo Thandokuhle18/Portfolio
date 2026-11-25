@@ -2,7 +2,7 @@ import { SectionHeading } from './SectionHeading'
 import { Reveal } from './Reveal'
 
 const education = [
-  'Melsoft AI-Augmented Full-Stack Developer Programme, April to October 2026 (in progress; selected into the Top 25 through a competitive hackathon)',
+  'Melsoft AI-Augmented Full-Stack Developer Programme, April to December 2026 (in progress; selected into the Top 25 through a competitive hackathon)',
   'Bachelor of Computer and Information Sciences in Application Development, Emeris Ruimsig (formerly IIE MSA), 2025 to 2027',
   'Higher Certificate in Mobile Application and Web Development, IIE MSA, 2024, with distinction',
 ]

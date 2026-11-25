@@ -1,16 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Project } from '../data/projects'
 import { Reveal } from './Reveal'
 
 export function ProjectCard({ project }: { project: Project }) {
-  const [imageMissing, setImageMissing] = useState(false)
+  const [imageAvailable, setImageAvailable] = useState(false)
+  useEffect(() => {
+    let active = true
+    const image = new Image()
+    image.onload = () => { if (active) setImageAvailable(true) }
+    image.src = `/images/projects/${project.slug}.png`
+    return () => { active = false }
+  }, [project.slug])
   return (
     <Reveal>
       <article className={`project-row tone-${project.tone}`}>
-        <div className="project-visual">
-          {!imageMissing && <img src={`/images/projects/${project.slug}.png`} alt={`${project.name} project preview`} loading="lazy" onError={() => setImageMissing(true)} />}
-          {imageMissing && <div className="project-placeholder"><span className="placeholder-name">{project.name}</span><span className="placeholder-rule" /></div>}
-        </div>
+        {imageAvailable && <div className="project-visual"><img src={`/images/projects/${project.slug}.png`} alt={`${project.name} project preview`} loading="lazy" /></div>}
         <div className="project-content">
           <div className="project-title-line"><h3>{project.name}</h3></div>
           {project.status && <p className="project-status">{project.status}</p>}
