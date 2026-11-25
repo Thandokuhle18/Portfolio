@@ -1,37 +1,62 @@
+import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 
-const heroItem = {
-  hidden: { opacity: 0, y: 6 },
+const eyebrowText = 'SOFTWARE DEVELOPER · SOUTH AFRICA'
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 5 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
 }
 
 export function Hero() {
   const reduceMotion = useReducedMotion()
+  const [typedCharacters, setTypedCharacters] = useState(0)
+
+  useEffect(() => {
+    if (reduceMotion) return
+
+    let count = 0
+    const timer = window.setInterval(() => {
+      count += 1
+      setTypedCharacters(count)
+      if (count >= eyebrowText.length) window.clearInterval(timer)
+    }, 1200 / eyebrowText.length)
+
+    return () => window.clearInterval(timer)
+  }, [reduceMotion])
 
   return (
     <section className="hero page-shell" id="home" aria-labelledby="hero-title">
       <motion.div
         className="hero-copy"
-        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
+        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
         initial={reduceMotion ? false : 'hidden'}
         whileInView={reduceMotion ? undefined : 'visible'}
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.25 }}
       >
-        <motion.p className="eyebrow" variants={heroItem}>Software developer · South Africa</motion.p>
-        <motion.h1 id="hero-title" variants={heroItem}>Thandokuhle <em>Maphanga</em></motion.h1>
-        <motion.p className="hero-intro" variants={heroItem}>I build full-stack web and cloud applications with a growing focus on applied AI. Currently completing a degree in Application Development and the Melsoft AI-Augmented Full-Stack Developer programme.</motion.p>
-        <motion.ul className="at-a-glance" variants={heroItem}>
-          <li><span>Location</span>Based in Krugersdorp, Gauteng</li>
-          <li><span>Education</span>BCIS Application Development, Emeris Ruimsig</li>
-          <li><span>Programme</span>Melsoft AI-Augmented Full-Stack Developer Programme</li>
-        </motion.ul>
-        <motion.a className="text-link" href="#work" variants={heroItem}>View selected work <span aria-hidden="true">↗</span></motion.a>
+        <p className="eyebrow hero-eyebrow" aria-label={eyebrowText}>
+          <span aria-hidden="true">{reduceMotion ? eyebrowText : eyebrowText.slice(0, typedCharacters)}</span>
+          {!reduceMotion && typedCharacters < eyebrowText.length && <span className="typing-cursor" aria-hidden="true" />}
+        </p>
+        <motion.div className="hero-name-group" variants={fadeUp}>
+          <h1 id="hero-title">Thandokuhle <em>Maphanga</em></h1>
+          <motion.div
+            className="hero-name-rule"
+            aria-hidden="true"
+            initial={reduceMotion ? false : { scaleX: 0 }}
+            whileInView={reduceMotion ? undefined : { scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          />
+        </motion.div>
+        <motion.p className="hero-intro" variants={fadeUp}>I build full-stack web and cloud applications with a growing focus on applied AI. Currently completing a degree in Application Development and the Melsoft AI-Augmented Full-Stack Developer programme.</motion.p>
+        <motion.a className="text-link" href="#work" variants={fadeUp}>View selected work <span aria-hidden="true">↗</span></motion.a>
       </motion.div>
       <div className="portrait-wrap">
         <motion.div
           className="portrait-backdrop"
           aria-hidden="true"
-          initial={reduceMotion ? false : { x: 6, y: 6 }}
+          initial={reduceMotion ? false : { x: 5, y: 5 }}
           whileInView={reduceMotion ? undefined : { x: 0, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
